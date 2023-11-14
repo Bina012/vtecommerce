@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $loginPath = '/login';
+    protected $redirectPath = '/dashboard';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -36,5 +39,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request){
+        return view('auth.login');
+    }
+
+    public function authenticate(Request $request){
+        $request->session()->flush();
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'active_status'=>'1'])){
+            $user = auth()->user();
+            //self:afterLogin($user);
+            return redirect()->intended(route('dashboard'));
+        }
+        return redirect()->route('login')->withInput()
+                ->withWarningMessage('Email or password is incorrect');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->flush();
+        return redirect()->route('login');
+    }
+
+    public function afterLogin($user){
+
     }
 }

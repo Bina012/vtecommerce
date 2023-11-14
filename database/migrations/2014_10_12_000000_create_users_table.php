@@ -16,18 +16,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_name', 250);
-            $table->string('last_name', 250);
-            $table->string('email', 250)->unique();
-            $table->string('avatar', 250);
-            $table->string('password', 250);
-            $table->timestamp('email_verified_at')->nullable();
+            $table->increments('id');
+            $table->string('fullname')->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
+            $table->string('email')->nullable()->unique();
+            $table->string('password')->nullable()->default(null);
+            $table->string('phone_number')->nullable()->default(null);
+            $table->boolean('active_status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
-
-        User::create(['first_name' => 'Toner','last_name' => 'Admin','email' => 'admin@themesbrand.com','password' => Hash::make('12345678'),'email_verified_at'=>'2022-01-02 17:04:58','avatar' => 'avatar-1.jpg','created_at' => now(),]);
     }
 
     /**

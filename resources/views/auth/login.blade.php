@@ -11,7 +11,7 @@
                             <div class="card-header bg-primary border-0">
                                 <div class="row">
                                     <div class="col-lg-4 col-3">
-                                        <img src="{{ URL::asset('build/images/auth/img-1.png') }}" alt=""
+                                        <img src="{{ URL::asset('../../images/auth/img-1.png') }}" alt=""
                                             class="img-fluid">
                                     </div>
                                     <div class="col-lg-8 col-9">
@@ -27,7 +27,7 @@
 
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input id="email" type="email"
+                                            <input id="email" type="email" name="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
                                                 value="admin@themesbrand.com" required autocomplete="email" autofocus
                                                 placeholder="Enter your email">
@@ -44,7 +44,7 @@
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input id="password" type="password"
+                                                <input id="password" type="password" 
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     name="password" required autocomplete="current-password" placeholder="Enter your password" value="12345678">
                                                 <button
@@ -120,5 +120,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ URL::asset('build/js/pages/password-addon.init.js') }}"></script>
+    <script src="{{ URL::asset('../..//js/pages/password-addon.init.js') }}"></script>
 @endsection

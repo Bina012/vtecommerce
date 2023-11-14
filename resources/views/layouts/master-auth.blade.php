@@ -8,7 +8,7 @@
     <meta content="eCommerce + Admin HTML Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('../..//images/favicon.ico') }}">
 
     <!-- head css -->
     @include('layouts.head-css')
@@ -23,9 +23,9 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-2">
                         <a class="navbar-brand mb-2 mb-sm-0" href="index">
-                            <img src="{{ URL::asset('build/images/logo-dark.png') }}" class="card-logo card-logo-dark"
+                            <img src="{{ URL::asset('../../images/logo-dark.png') }}" class="card-logo card-logo-dark"
                                 alt="logo dark" height="22">
-                            <img src="{{ URL::asset('build/images/logo-light.png') }}"
+                            <img src="{{ URL::asset('../../images/logo-light.png') }}"
                                 class="card-logo card-logo-light" alt="logo light" height="22">
                         </a>
                     </div>
