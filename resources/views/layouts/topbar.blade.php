@@ -6,19 +6,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="index" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('../../images/logo-sm.png') }}" alt="" height="22">
+                            <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('../../images/logo-dark.png') }}" alt="" height="25">
+                            <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="25">
                         </span>
                     </a>
 
                     <a href="index" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('../../images/logo-sm.png') }}" alt="" height="22">
+                            <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('../../images/logo-light.png') }}" alt="" height="25">
+                            <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="25">
                         </span>
                     </a>
                 </div>
@@ -65,18 +65,18 @@
                             <div class="row g-0">
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-2.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-2.png') }}" alt="Github">
                                         <!-- <span>GitHub</span> -->
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-3.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-3.png') }}" alt="Github">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-13.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-13.png') }}" alt="Github">
                                     </a>
                                 </div>
                             </div>
@@ -84,17 +84,17 @@
                             <div class="row g-0">
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-5.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-5.png') }}" alt="Github">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-6.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-6.png') }}" alt="Github">
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#!">
-                                        <img src="{{ URL::asset('../../images/brands/img-4.png') }}" alt="Github">
+                                        <img src="{{ URL::asset('build/images/brands/img-4.png') }}" alt="Github">
                                     </a>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ URL::asset('../../images/products/img-1.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                        <img src="{{ URL::asset('build/images/products/img-1.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-grow-1">
                                             <h6 class="mt-0 mb-2 fs-15">
                                                 <a href="apps-ecommerce-product-details" class="text-reset">Branded
@@ -153,7 +153,7 @@
 
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ URL::asset('../../images/products/img-2.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                        <img src="{{ URL::asset('build/images/products/img-2.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-grow-1">
                                             <h6 class="mt-0 mb-2 fs-15">
                                                 <a href="apps-ecommerce-product-details" class="text-reset">Bentwood Chair</a>
@@ -173,7 +173,7 @@
 
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ URL::asset('../../images/products/img-3.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                        <img src="{{ URL::asset('build/images/products/img-3.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-grow-1">
                                             <h6 class="mt-0 mb-2 fs-15">
                                                 <a href="apps-ecommerce-product-details" class="text-reset">
@@ -194,7 +194,7 @@
 
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ URL::asset('../../images/products/img-6.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                        <img src="{{ URL::asset('build/images/products/img-6.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-grow-1">
                                             <h6 class="mt-0 mb-2 fs-15">
                                                 <a href="apps-ecommerce-product-details" class="text-reset">Gray
@@ -215,7 +215,7 @@
 
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ URL::asset('../../images/products/img-5.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
+                                        <img src="{{ URL::asset('build/images/products/img-5.png') }}" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-grow-1">
                                             <h6 class="mt-0 mb-2 fs-15">
                                                 <a href="apps-ecommerce-product-details" class="text-reset">Stillbird Helmet</a>
@@ -325,7 +325,7 @@
                                 <div class="text-reset notification-item d-block dropdown-item position-relative unread-message">
                                     <div class="d-flex">
                                         <div class="position-relative me-3 flex-shrink-0">
-                                            <img src="{{ URL::asset('../../images/users/avatar-2.jpg') }}" class="rounded-circle avatar-xs" alt="user-pic">
+                                            <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" class="rounded-circle avatar-xs" alt="user-pic">
                                             <span class="active-badge position-absolute start-100 translate-middle p-1 bg-success rounded-circle">
                                                 <span class="visually-hidden">New alerts</span>
                                             </span>
@@ -491,7 +491,7 @@
                             <h5 class="text-overflow text-muted fs-13 mb-2 mt-3 text-uppercase notification-title">People</h5>
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ URL::asset('../../images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
+                                    <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
                                     <div>
                                         <h6 class="mb-0">Ayaan Bowen</h6>
                                         <span class="fs-12 text-muted">React Developer</span>
@@ -500,7 +500,7 @@
                             </a>
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ URL::asset('../../images/users/avatar-7.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
+                                    <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
                                     <div>
                                         <h6 class="mb-0">Alexander Kristi</h6>
                                         <span class="fs-12 text-muted">React Developer</span>
@@ -509,7 +509,7 @@
                             </a>
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ URL::asset('../../images/users/avatar-5.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
+                                    <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}" alt="" class="avatar-xs rounded-circle flex-shrink-0 me-2">
                                     <div>
                                         <h6 class="mb-0">Alan Carla</h6>
                                         <span class="fs-12 text-muted">React Developer</span>

@@ -18,7 +18,7 @@
                         <li class="chat-list left">
                             <div class="conversation-list">
                                 <div class="chat-avatar">
-                                    <img src="{{ URL::asset('../../images/logo-sm.png') }}" alt="">
+                                    <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="">
                                 </div>
                                 <div class="user-chat-content">
                                     <div class="ctext-wrap">
@@ -69,7 +69,7 @@
                         <li class="chat-list left">
                             <div class="conversation-list">
                                 <div class="chat-avatar">
-                                    <img src="{{ URL::asset('../../images/logo-sm.png') }}" alt="">
+                                    <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="">
                                 </div>
                                 <div class="user-chat-content">
                                     <div class="ctext-wrap">
@@ -957,7 +957,7 @@
                                         </span>
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
-                                                <img src="{{ URL::asset('../../images/sidebar/img-1.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
+                                                <img src="{{ URL::asset('build/images/sidebar/img-1.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
                                             </span>
                                             <span class="flex-grow-1">
                                                 <span class="d-flex h-100 flex-column">
@@ -982,7 +982,7 @@
                                         </span>
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
-                                                <img src="{{ URL::asset('../../images/sidebar/img-2.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
+                                                <img src="{{ URL::asset('build/images/sidebar/img-2.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
                                             </span>
                                             <span class="flex-grow-1">
                                                 <span class="d-flex h-100 flex-column">
@@ -1007,7 +1007,7 @@
                                         </span>
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
-                                                <img src="{{ URL::asset('../../images/sidebar/img-3.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
+                                                <img src="{{ URL::asset('build/images/sidebar/img-3.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
                                             </span>
                                             <span class="flex-grow-1">
                                                 <span class="d-flex h-100 flex-column">
@@ -1032,7 +1032,7 @@
                                         </span>
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
-                                                <img src="{{ URL::asset('../../images/sidebar/img-4.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
+                                                <img src="{{ URL::asset('build/images/sidebar/img-4.jpg') }}" alt="" class="avatar-sm h-100 object-fit-cover">
                                             </span>
                                             <span class="flex-grow-1">
                                                 <span class="d-flex h-100 flex-column">
