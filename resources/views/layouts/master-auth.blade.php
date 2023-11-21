@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title') | Toner eCommerce + Admin HTML Template</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="eCommerce + Admin HTML Template" name="description">
-    <meta content="Themesbrand" name="author">
+    <meta content="eCommerce" name="description">
+    <meta content="v4Tech" name="author">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('build//images/favicon.ico') }}">
 
@@ -30,25 +30,6 @@
                         </a>
                     </div>
                     <!---end col-->
-                    <div class="col-auto">
-                        <ul class="list-unstyled hstack gap-2 mb-0">
-                            <li class="me-md-3">
-                                <a href="#!" class="text-body fw-medium fs-15">Become a Selling</a>
-                            </li>
-                            <li class="d-none d-md-block">
-                                <a href="#!" class="btn btn-soft-secondary" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="bi bi-google-play align-middle me-1"></i> Download App
-                                </a>
-                            </li>
-                            <li class="d-none d-md-block">
-                                <a href="#!" class="btn btn-soft-primary" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="bi bi-apple align-middle me-1"></i> Download App
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
                 <!--end row-->
             </div>

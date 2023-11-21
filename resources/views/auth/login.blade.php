@@ -22,14 +22,14 @@
                             <div class="card-body">
                                 <p class="text-muted fs-15">Sign in to continue to Toner.</p>
                                 <div class="p-2">
-                                    <form method="POST" action="{{ route('login') }}">
+                                    <form method="POST" action="{{ route('auth.login') }}">
                                         @csrf
 
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
                                             <input id="email" type="email" name="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="admin@themesbrand.com" required autocomplete="email" autofocus
+                                                required autocomplete="email" autofocus
                                                 placeholder="Enter your email">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -39,57 +39,25 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <div class="float-end">
-                                                <a href="{{ route('password.request') }}" class="text-muted">Forgot password?</a>
-                                            </div>
-                                            <label class="form-label" for="password-input">Password</label>
-                                            <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input id="password" type="password" 
-                                                    class="form-control @error('password') is-invalid @enderror"
-                                                    name="password" required autocomplete="current-password" placeholder="Enter your password" value="12345678">
-                                                <button
-                                                    class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                                                    type="button" id="password-addon"><i
-                                                        class="ri-eye-fill align-middle"></i></button>
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                            <label for="email" class="form-label">Password</label>
+                                            <input id="password" type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror" name="password"
+                                                required
+                                                placeholder="Enter your password">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $password }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
 
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="auth-remember-check">Remember me</label>
-                                        </div>
 
                                         <div class="mt-4">
                                             <button class="btn btn-primary w-100" type="submit">Sign In</button>
                                         </div>
-
-                                        <div class="mt-4 pt-2 text-center">
-                                            <div class="signin-other-title">
-                                                <h5 class="fs-13 mb-4 title">Sign In with</h5>
-                                            </div>
-                                            <div class="pt-2 hstack gap-2 justify-content-center">
-                                                <button type="button" class="btn btn-soft-primary btn-icon"><i
-                                                        class="ri-facebook-fill fs-16"></i></button>
-                                                <button type="button" class="btn btn-soft-danger btn-icon"><i
-                                                        class="ri-google-fill fs-16"></i></button>
-                                                <button type="button" class="btn btn-soft-dark btn-icon"><i
-                                                        class="ri-github-fill fs-16"></i></button>
-                                                <button type="button" class="btn btn-soft-info btn-icon"><i
-                                                        class="ri-twitter-fill fs-16"></i></button>
-                                            </div>
-                                        </div>
                                     </form>
 
-                                    <div class="text-center mt-5">
-                                        <p class="mb-0">Don't have an account ? <a href="{{ route('register') }}"
-                                                class="fw-semibold text-secondary text-decoration-underline"> Sign Up</a>
-                                        </p>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -109,8 +77,8 @@
                             <p class="mb-0 text-muted">©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Toner. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                Themesbrand
+                                </script> eCommerce. Powered <i class="mdi mdi-heart text-danger"></i> by
+                                v4Tech
                             </p>
                         </div>
                     </div>

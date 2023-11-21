@@ -31,7 +31,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">{{ __('t-menu') }}</span></li>
                 <li class="nav-item">
-                    <a href="index" class="nav-link menu-link"> <i class="bi bi-speedometer2"></i> <span data-key="t-dashboard">{{ __('t-dashboard') }}</span> <span class="badge badge-pill bg-danger-subtle text-danger" data-key="t-hot">{{ __('t-hot') }}</span></a>
+                    <a href="{{ route('dashboard') }}" class="nav-link menu-link"> <i class="bi bi-speedometer2"></i> <span data-key="t-dashboard">{{ __('t-dashboard') }}</span> <span class="badge badge-pill bg-danger-subtle text-danger" data-key="t-hot">{{ __('t-hot') }}</span></a>
                 </li>
 
                 <li class="nav-item">
@@ -76,10 +76,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="calendar" class="nav-link menu-link"><i class="bi bi-calendar-week"></i> <span data-key="t-calendar">{{ __('t-calendar') }}</span> </a>
                 </li>
 
                 <li class="nav-item">
@@ -199,7 +195,7 @@
                                 <a href="auth-twostep-basic" class="nav-link" data-key="t-two-step-verify">{{ __('t-two-step-verify') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="auth-logout-basic" class="nav-link" data-key="t-logout">{{ __('t-logout') }}</a>
+                                <a href="{{ route('user.logout') }}" class="nav-link" data-key="t-logout">{{ __('t-logout') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="auth-404" class="nav-link" data-key="t-error-404">{{ __('t-error-404') }}</a>
@@ -209,51 +205,6 @@
                             </li>
                             <li class="nav-item">
                                 <a href="coming-soon" class="nav-link" data-key="t-coming-soon">{{ __('t-coming-soon') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/components/index" target="_blank">
-                        <i class="bi bi-layers"></i> <span data-key="t-components">{{ __('t-components') }}</span> <span class="badge badge-pill bg-secondary" data-key="t-v1.0">{{ __('v1.0') }}</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMultilevel">
-                        <i class="bi bi-share"></i> <span data-key="t-multi-level">{{ __('t-multi-level') }}</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarMultilevel">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-level-1.1"> {{ __('t-level-1.1') }} </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#sidebarAccount" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAccount" data-key="t-level-1.2"> {{ __('t-level-1.2') }}
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarAccount">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link" data-key="t-level-2.1"> {{ __('t-level-2.1') }} </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#sidebarCrm" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCrm" data-key="t-level-2.2"> {{ __('t-level-2.2') }}
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebarCrm">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="#" class="nav-link" data-key="t-level-3.1"> {{ __('t-level-3.1') }}
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="#" class="nav-link" data-key="t-level-3.2"> {{ __('t-level-3.2') }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                         </ul>
                     </div>

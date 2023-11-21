@@ -48,8 +48,7 @@ class LoginController extends Controller
     public function authenticate(Request $request){
         $request->session()->flush();
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'active_status'=>'1'])){
-            $user = auth()->user();
-            //self:afterLogin($user);
+            //$user = auth()->user();
             return redirect()->intended(route('dashboard'));
         }
         return redirect()->route('login')->withInput()
@@ -62,7 +61,4 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 
-    public function afterLogin($user){
-
-    }
 }
