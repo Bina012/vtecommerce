@@ -53,7 +53,7 @@
                                 <a href="product-create" class="nav-link" data-key="t-create-product">{{ __('t-create-product') }}</a>
                             </li>
                             <li class="nav-item">       
-                                <a href="categories" class="nav-link" data-key="t-categories">{{ __('t-categories') }}</a>
+                                <a href="{{ route('category.index') }}" class="nav-link" data-key="t-categories">{{ __('t-categories') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="sub-categories" class="nav-link" data-key="t-sub-categories">{{ __('t-sub-categories') }}</a>
