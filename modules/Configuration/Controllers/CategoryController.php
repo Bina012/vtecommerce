@@ -5,15 +5,18 @@ namespace Modules\Configuration\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Configuration\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\Storage;
+
 
 class CategoryController extends Controller
 {
     protected $categories;
     protected $destinationPath;
 
-    public function __construct(CategoryRepository $categories){
+    public function __construct(CategoryRepository $categories)
+    {
         $this->categories = $categories;
-        $this->destinationPath = 'categories/';
+        $this->destinationPath = 'categories';
     }
 
     /**
@@ -22,8 +25,27 @@ class CategoryController extends Controller
 
     public function index()
     {
-       return view('Configuration::Category.index')
-            ->withCategories($this->categories->all());
+        $categoryListData = [];
+
+        $categories = $this->categories->all();
+
+        foreach ($categories as $category) {
+            $categoryData = [
+                'id' => $category->id,
+                "categoryImg" => 'storage/' . $category->image_path,
+                "categoryTitle" => $category->title,
+                "subCategory" => ["Wireless", "Gaming", "Circumaural (over-ear)", "Supra-aural (on-ear)", "Over-Ear Headphones", "On-Ear Headphones", "True Wireless Earbuds"],
+                "description" => $category->description
+            ];
+
+            // Add the current category data to $categoryListData array
+            $categoryListData[] = $categoryData;
+        }
+
+
+        return view('Configuration::Category.index')
+            ->withCategories($categories)
+            ->withCategoryListData($categoryListData);
     }
 
     /**
@@ -40,24 +62,41 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $data =$request->except(['attachment']);
-        if($request->file('attachment')){
+
+
+        $data = $request->except(['attachment']);
+
+        if ($request->file('attachment')) {
             $data['image_path'] = $request->file('attachment')
-                                    ->storeAs($this->destinationPath,time().'.'.$request->file('attachment')
-                                    ->getClientOriginalExtension());
+                ->storeAs($this->destinationPath, time() . '.' . $request->file('attachment')
+                    ->getClientOriginalExtension());
         }
-        $category = $this->categories->create($data);
-        if($category){
-            return redirect()->route('category.index')->withSuccessMessage('Category added successfully!!');
+
+        if ($data['id'] === null) {
+            unset($data['id']); // Remove the 'id' field if it's null for insertion
+            $category = $this->categories->create($data);
+            $message = $category ? 'Category added successfully!!' : 'OOPS, Category cannot be added!!';
+        } else {
+            $category = $this->categories->find($data['id']);
+            if ($category) {
+                $category->update($data);
+                $message = 'Category updated successfully!!';
+            } else {
+                $message = 'OOPS, Category cannot be updated!!';
+            }
         }
-        return redirect()->route('category.index')->withErrorMessage('OOPS, Category cannot be added!!');
+
+        return redirect()->route('category.index')->with(
+            $category ? 'successMessage' : 'errorMessage',
+            $message
+        );
     }
 
     /**
      * Display the specified resource.
      */
 
-     /**
+    /**
      * @OA\Get(
      *     path="/api/fiscalyears/{fiscalyear}",
      *     tags={"Fiscal Year"},
@@ -83,11 +122,11 @@ class CategoryController extends Controller
     public function show($id)
     {
         $data = $this->fiscalYears->find($id);
-       if($data){
-        return Response(['status'=>200,'data'=>$data,'message'=>'Fiscal year found successfully.'],200);
-       }else{
-        return Response(['status'=>404,'message'=>'Fiscal year not found.'],200);
-       }   
+        if ($data) {
+            return Response(['status' => 200, 'data' => $data, 'message' => 'Fiscal year found successfully.'], 200);
+        } else {
+            return Response(['status' => 404, 'message' => 'Fiscal year not found.'], 200);
+        }
     }
 
     /**
@@ -102,7 +141,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      */
 
-     /**
+    /**
      * @OA\Put(
      *     path="/api/fiscalyears/{fiscalyear}",
      *     tags={"Fiscal Year"},
@@ -130,11 +169,11 @@ class CategoryController extends Controller
      */
     public function update(FiscalYearRequest $request, $id)
     {
-        $fiscalyear = $this->fiscalYears->update($id,$request->all());
-        if($fiscalyear){
-            return Response(['status'=>200,'message'=>'Fiscal year updated successfully.'],200);
-        }else{
-            return Response(['status'=>500,'message'=>'Failed to update fiscal year.'],200);
+        $fiscalyear = $this->fiscalYears->update($id, $request->all());
+        if ($fiscalyear) {
+            return Response(['status' => 200, 'message' => 'Fiscal year updated successfully.'], 200);
+        } else {
+            return Response(['status' => 500, 'message' => 'Failed to update fiscal year.'], 200);
         }
     }
 
@@ -142,7 +181,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      */
 
-     /**
+    /**
      * @OA\Delete(
      *     path="/api/fiscalyears/{fiscalyear}",
      *     tags={"Fiscal Year"},
@@ -167,11 +206,29 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $flag = $this->fiscalYears->destroy($id);
-        if($flag){
-            return Response(['status'=>200,'message'=>'Fiscal year successfully deleted.'],200);
-        }else{
-            return Response(['status'=>500,'message'=>'Failed to delete fiscal year.'],200);
+
+        // Assuming $id holds the ID of the category to be deleted
+        $category = $this->categories->find($id);
+
+        if ($category) {
+            // Get the file path associated with the category
+            $filePath = $category->image_path;
+
+            // Delete the file if it exists
+            if ($filePath && Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+
+            // Delete the category itself
+            $deleted = $category->delete();
+
+            if ($deleted) {
+                return response()->json(['status' => 200, 'message' => 'Category and associated files successfully deleted.'], 200);
+            } else {
+                return response()->json(['status' => 500, 'message' => 'Failed to delete category.'], 500);
+            }
+        } else {
+            return response()->json(['status' => 404, 'message' => 'Category not found.'], 404);
         }
     }
 }

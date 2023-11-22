@@ -9,20 +9,91 @@
     <x-breadcrumb title="Categories" pagetitle="Products" />
 
     <div class="row">
+        <div class="col-xxl-3">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Create Categories</h6>
+                </div>
+                <div class="card-body">
+                <form autocomplete="off" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation"  novalidate>
+                {!!csrf_field() !!}        
+                <input type="hidden" id="categoryid-input" name="id" class="form-control" value="">
+                        <div class="row">
+                            <div class="col-xxl-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="categoryTitle" class="form-label">Category Title<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="title" class="form-control" id="categoryTitle" placeholder="Enter title"
+                                        required>
+                                    <div class="invalid-feedback">Please enter a category title.</div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="slugInput" class="form-label">Slug <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="slug" class="form-control" id="slugInput" placeholder="Enter slug">
+                                </div>
+                            </div>
+                            <div class="col-xxl-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="category-image-input" class="form-label d-block">Image <span
+                                            class="text-danger">*</span></label>
+
+                                    <div class="position-relative d-inline-block">
+                                        <div class="position-absolute top-100 start-100 translate-middle">
+                                            <label for="category-image-input" class="mb-0" data-bs-toggle="tooltip"
+                                                data-bs-placement="right" title="Select Category Image">
+                                                <span class="avatar-xs d-inline-block">
+                                                    <span
+                                                        class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                        <i class="ri-image-fill"></i>
+                                                    </span>
+                                                </span>
+                                            </label>
+                                            <input class="form-control d-none" name="attachment" id="category-image-input" type="file"
+                                                accept="image/png, image/gif, image/jpeg">
+                                        </div>
+                                        <div class="avatar-lg">
+                                            <div class="avatar-title bg-light rounded-3">
+                                                <img src="#" alt="" id="category-img"
+                                                    class="avatar-md h-auto rounded-3 object-fit-cover">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="error-msg mt-1">Please add a category images.</div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="descriptionInput" class="form-label">Description</label>
+                                    <textarea class="form-control" name="description" id="descriptionInput" rows="3" placeholder="Description" required></textarea>
+                                    <div class="invalid-feedback">Please enter a description.</div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-12">
+                                <div class="text-end">
+                                    <button type="submit" id="submit-btn" class="btn btn-success">Add Category</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
         <div class="col-xxl-9">
-           
             <div class="row justify-content-between mb-4">
-                
-                <br/>
-                <div class="col-xxl-3 col-lg-5">
+                <div class="col-xxl-3 col-lg-6">
                     <div class="search-box mb-3 mb-lg-0">
-                        
                         <input type="text" class="form-control" id="searchInputList" placeholder="Search Category...">
                         <i class="ri-search-line search-icon"></i>
                     </div>
                 </div>
                 <!--end col-->
-                <div class="col-xxl-2 col-lg-4">
+                <div class="col-xxl-2 col-lg-6">
                     <select class="form-control" data-choices data-choices-search-false name="choices-single-default"
                         id="idStatus">
                         <option value="">Status</option>
@@ -35,260 +106,13 @@
                         <option value="Last Month">Last Month</option>
                     </select>
                 </div>
-                <div class="col-xxl-2 col-lg-3">
-                <div class="text-end">
-                    <a href="{{ route('category.create') }}" class="btn btn-success">Add Category</a>
-                </div>
-                </div>
                 <!--end col-->
             </div>
             <!--end row-->
 
             <div class="row" id="categories-list">
-                
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Headphone</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Wireless</a></li>
-                                <li><a href="#!" class="text-muted">Gaming</a></li>
-                                <li><a href="#!" class="text-muted">Circumaural (over-ear)</a></li>
-                                <li><a href="#!" class="text-muted">Supra-aural (on-ear)</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/headphone.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Watch</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Digital Watches</a></li>
-                                <li><a href="#!" class="text-muted">Dive Watches</a></li>
-                                <li><a href="#!" class="text-muted">Pilot's Watches</a></li>
-                                <li><a href="#!" class="text-muted">Field Watches</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/smart-watch.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Furniture</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Beds</a></li>
-                                <li><a href="#!" class="text-muted">Cabinets</a></li>
-                                <li><a href="#!" class="text-muted">Chairs & Seating</a></li>
-                                <li><a href="#!" class="text-muted">Desks</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/sofa.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Clothing</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Casual Wear</a></li>
-                                <li><a href="#!" class="text-muted">Formal Wear</a></li>
-                                <li><a href="#!" class="text-muted">Business Attire</a></li>
-                                <li><a href="#!" class="text-muted">Sportswear</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/clothes.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Footwear</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Athletic Shoes</a></li>
-                                <li><a href="#!" class="text-muted">Leather Shoes</a></li>
-                                <li><a href="#!" class="text-muted">Figure Shoes</a></li>
-                                <li><a href="#!" class="text-muted">Crocs</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/baby-shoe.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Lighting</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Ambient Lighting</a></li>
-                                <li><a href="#!" class="text-muted">Task Lighting</a></li>
-                                <li><a href="#!" class="text-muted">Accent Lighting</a></li>
-                                <li><a href="#!" class="text-muted">Track Light</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/light-bulb.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Beauty & Personal Care</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Baby Care</a></li>
-                                <li><a href="#!" class="text-muted">Deodrants</a></li>
-                                <li><a href="#!" class="text-muted">Feminine Care</a></li>
-                                <li><a href="#!" class="text-muted">Fragrances</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/cosmetics.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Books</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Fantasy</a></li>
-                                <li><a href="#!" class="text-muted">Horror</a></li>
-                                <li><a href="#!" class="text-muted">Mystery</a></li>
-                                <li><a href="#!" class="text-muted">Romance</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/book.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-6">
-                    <div class="card categrory-widgets overflow-hidden">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="flex-grow-1 mb-0">Other Accessories</h5>
-                                <ul class="flex-shrink-0 list-unstyled hstack gap-1 mb-0">
-                                    <li><a href="#!" class="badge bg-info-subtle text-info">Edit</a></li>
-                                    <li><a href="#delteModal" data-bs-toggle="modal"
-                                            class="badge bg-danger-subtle text-danger">Delete</a></li>
-                                </ul>
-                            </div>
-                            <ul class="list-unstyled vstack gap-2 mb-0">
-                                <li><a href="#!" class="text-muted">Bags</a></li>
-                                <li><a href="#!" class="text-muted">Eyewear</a></li>
-                                <li><a href="#!" class="text-muted">Belts</a></li>
-                                <li><a href="#!" class="text-muted">Hair accessories</a></li>
-                            </ul>
-                            <div class="mt-3">
-                                <a data-bs-toggle="offcanvas" href="#overviewOffcanvas"
-                                    class="fw-medium link-effect">Read More <i
-                                        class="ri-arrow-right-line align-bottom ms-1"></i></a>
-                            </div>
-                            <img src="{{ URL::asset('build/images/ecommerce/smart-watch.png') }}" alt=""
-                                class="img-fluid category-img object-fit-cover">
-                        </div>
-                    </div>
-                </div>
+               
+
             </div>
             <!--end row-->
 
@@ -393,7 +217,16 @@
     </div><!-- /.modal -->
 @endsection
 @section('scripts')
-    <script src="{{ URL::asset('build/js/backend/product-categories.init.js') }}"></script>
+<script>
+
+    
+var categoryListData = @json($categoryListData);
+// Now, categoryListData contains your PHP array data in JavaScript format
+
+// You can access the data as needed, for example:
+console.log('pravin',categoryListData); // This will output the array in the browser console
+</script>
+   <script src="{{ URL::asset('build/js/backend/product-categories.init.js') }}"></script>
 
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
