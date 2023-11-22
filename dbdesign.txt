@@ -1,0 +1,76 @@
+Configuration
+User ma office ID foreign key
+
+Offices		
+	Parent ID
+	Office Address
+	Email email
+	phone
+	Focal Person Name
+	Contact Number
+	fax
+	website
+	Latitude
+	Longitude
+	Logo Path
+	
+Categories
+	id 
+	title
+	slug
+	image_path
+	description
+	
+Sub categories
+	id
+	category_id
+	title
+	description
+	
+tags
+	id
+	tag
+
+Products
+	id
+	title
+	desc
+	short_desc
+	category_id
+	manufacrer_name
+	manufacturer_brand
+	stocks
+	price
+	discount
+	color
+	size
+	status
+	visibility
+	tags
+	
+Product_tags
+	id
+	product_id
+	tag_id
+	
+Product_gallery
+	id
+	product_id
+	image_path
+	
+Orders
+	id
+	product_id
+	quantity
+	order_date
+	delivery_date
+	no_of_unit
+	unit_amount
+	total_amount	
+	delivery_status
+	delivery_location
+	customer_name
+	customer_phonenumber
+	payment_method
+	ordered_by
+	
