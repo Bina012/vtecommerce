@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),      
             'phone_number' => '9860305324',   
-            'active_status' => 1,   
+            'active_status' => 1,
+            'office_id' => 1   
          ]);  
     }
 }
