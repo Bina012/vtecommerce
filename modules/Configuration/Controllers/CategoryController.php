@@ -104,9 +104,9 @@ class CategoryController extends Controller
             }
 
             // Delete the category itself
-            $deleted = $category->delete();
+            $flag = $this->categories->destroy($id);
 
-            if ($deleted) {
+            if ($flag) {
                 return response()->json(['status' => 200, 'message' => 'Category and associated files successfully deleted.'], 200);
             } else {
                 return response()->json(['status' => 500, 'message' => 'Failed to delete category.'], 500);

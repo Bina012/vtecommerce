@@ -6,79 +6,6 @@ Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
 File: product category init File
 */
-// var subCategoriesData = [
-//     {
-//         "id": 1,
-//         "subcategory": "Wireless",
-//         "category": "Headphone",
-//         "createby": "Admin",
-//         "description": "Headphones are a pair of small speakers used for listening to sound from a computer, music player or other such electronic device."
-//     }, {
-//         "id": 2,
-//         "subcategory": "Leather Shoes",
-//         "category": "Footwear",
-//         "createby": "Admin",
-//         "description": "It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend"
-//     }, {
-//         "id": 3,
-//         "subcategory": "Bags",
-//         "category": "Other Accessories",
-//         "createby": "Admin",
-//         "description": "For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words."
-//     },{
-//         "id": 4,
-//         "subcategory": "Cabinets",
-//         "category": "Furniture",
-//         "createby": "Admin",
-//         "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores"
-//     }, {
-//         "id": 5,
-//         "subcategory": "Digital Watches",
-//         "category": "Watch",
-//         "createby": "Admin",
-//         "description": "A watch is a symbol of time and wearing a watch implies that you respect the importance of time."
-//     }, {
-//         "id": 6,
-//         "subcategory": "Supra-aural (on-ear)",
-//         "category": "Headphone",
-//         "createby": "Admin",
-//     },{
-//         "id": 7,
-//         "subcategory": "Sportswear",
-//         "category": "Clothing",
-//         "createby": "Admin",
-//         "description": "Headphones are a pair of small speakers used for listening to sound from a computer, music player or other such electronic device."
-//     }, {
-//         "id": 8,
-//         "subcategory": "Casual Wear",
-//         "category": "Clothing",
-//         "createby": "Admin",
-//         "description": "In enim justo rhoncus ut imperdiet a venenatis vitae justo. Nullam dictum felis eu pede mollis pretium integer tincidunt aenean vulputate eleifend tellus."
-//     }, {
-//         "id": 9,
-//         "subcategory": "Ambient",
-//         "category": "Lighting",
-//         "createby": "Admin",
-//     },{
-//         "id": 10,
-//         "subcategory": "Chairs & Seating",
-//         "category": "Furniture",
-//         "createby": "Admin",
-//         "description": "To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words. If several languages coalesce, the grammar of the resulting."
-//     }, {
-//         "id": 11,
-//         "subcategory": "Feminine Care",
-//         "category": "Beauty & Personal Care",
-//         "createby": "Admin",
-//         "description": "Beauty Care is basically the science of beauty treatment that involves skin Care, hair Care, manicure, pedicure, Anti- aging treatments, facials, styling and so on."
-//     }, {
-//         "id": 12,
-//         "subcategory": "Horror",
-//         "category": "Books",
-//         "createby": "Admin",
-//         "description": "Books are portable and compact, and thus have an advantage over other media forms. Unlike other print media, books most often deal with a single subject."
-//     }
-// ];
 
 var editList = false;
 
@@ -251,7 +178,7 @@ function editCategoryList(elem){
             editList = true;
             document.getElementById("addCategoryLabel").innerHTML = "Edit Sub Categories";
             document.getElementById("addNewCategory").innerHTML = "Save";
-            document.getElementById("categoryid-input").value = item.id;
+            document.getElementById("categoryid-input").value = item.category_id;
             document.getElementById("SubcategoryTitle").value = item.subcategory;
             categoryInput.setChoiceByValue(item.category);
             document.getElementById("descriptionInput").value = item.description;

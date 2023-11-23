@@ -337,17 +337,22 @@ item.addEventListener('click', function (event) {
             },
         })
         .then(response => {
-            if (response.ok) {
+            console.log(response);
+            if (response.status == 200) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Category deleted successfully!!',
+                    icon: 'success',
+                    showCloseButton: true
+                });
                 // Handle successful deletion
-                console.log('Category deleted successfully');
                 // Add your logic here to update the UI or perform any other action
             } else {
                 // Handle error response
-                console.error('Failed to delete category');
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+
         });
     }
         function arrayRemove(arr, value) {
