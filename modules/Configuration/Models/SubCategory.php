@@ -5,22 +5,23 @@ namespace Modules\Configuration\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class SubCategory extends Model
 {
    use SoftDeletes;
-   protected $table = 'categories';
+   protected $table = 'subcategories';
 
    protected $fillable =[
     'title',
-    'slug',
+    'category_id',
     'description',
     'image_path',
    ];
 
    protected $hidden = ['deleted_at','created_at','updated_at'];
 
-   public function subcategory()
-    {
-      return $this->hasMany(SubCategory::class);
-    }
+   public function category()
+   {
+       return $this->belongsTo(Category::class,'category_id');
+   }
+  
 }

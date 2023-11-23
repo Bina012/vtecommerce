@@ -223,8 +223,7 @@
 var categoryListData = @json($categoryListData);
 // Now, categoryListData contains your PHP array data in JavaScript format
 
-// You can access the data as needed, for example:
-console.log('pravin',categoryListData); // This will output the array in the browser console
+
 </script>
    <script src="{{ URL::asset('build/js/backend/product-categories.init.js') }}"></script>
 

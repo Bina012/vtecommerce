@@ -27,14 +27,15 @@ class CategoryController extends Controller
     {
         $categoryListData = [];
 
-        $categories = $this->categories->all();
+        $categories = $this->categories->with(['subcategory'])->get();;
 
         foreach ($categories as $category) {
+            $subcategories = $category->subcategory()->pluck('title')->toArray();           
             $categoryData = [
                 'id' => $category->id,
                 "categoryImg" => 'storage/' . $category->image_path,
                 "categoryTitle" => $category->title,
-                "subCategory" => ["Wireless", "Gaming", "Circumaural (over-ear)", "Supra-aural (on-ear)", "Over-Ear Headphones", "On-Ear Headphones", "True Wireless Earbuds"],
+                "subCategory" => $subcategories,
                 "description" => $category->description
             ];
 
