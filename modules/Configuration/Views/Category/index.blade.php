@@ -3,7 +3,7 @@
     Categories
 @endsection
 @section('css')
-    <!-- extra css -->
+    
 @endsection
 @section('content')
     <x-breadcrumb title="Categories" pagetitle="Products" />
@@ -221,8 +221,6 @@
 
     
 var categoryListData = @json($categoryListData);
-// Now, categoryListData contains your PHP array data in JavaScript format
-
 
 </script>
    <script src="{{ URL::asset('build/js/backend/product-categories.init.js') }}"></script>

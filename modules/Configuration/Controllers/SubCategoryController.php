@@ -36,6 +36,7 @@ class SubCategoryController extends Controller
             $subcategoryData = [
                 'id' => $subcategory->id,
                 "subcategory" => $subcategory->title,
+                "category_id" => $category->id,
                 "category" => $category->title,
                 "category_id" => $category->id,
                 "description" => $subcategory->description

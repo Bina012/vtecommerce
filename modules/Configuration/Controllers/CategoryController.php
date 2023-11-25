@@ -101,11 +101,10 @@ class CategoryController extends Controller
             }
 
             // Delete the category itself
-            $deleted = $category->delete();
+            $flag = $this->categories->destroy($id);
 
-            if ($deleted) {
-                session()->flash('message.updated', "Category and associated files successfully deleted.");
-                return redirect()->route('category.index');
+            if ($flag) {
+                return response()->json(['status' => 200, 'message' => 'Category and associated files successfully deleted.'], 200);
             } else {
                 session()->flash('message.updated', "Failed to delete category");
                 return redirect()->route('category.index');
