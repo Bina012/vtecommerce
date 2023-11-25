@@ -34,12 +34,11 @@
                                 <div class="mb-3">
                                     <label for="categorySelect" class="form-label">Category <span
                                             class="text-danger">*</span></label>
-                                    <select name="category_id" class="form-control" name="categorySelect" id="categorySelect">
+                                    <select class="form-control" name="category_id" id="categorySelect">
                                         <option value="">Select Category</option>
-                                        
                                         @foreach ($categories as $category)
 
-                                        <option value="{{$category->id}}">{{$category->title}}</option>
+                                        <option value="{{ $category->id }}" >{{$category->title}}</option>
                                        @endforeach
                                     </select>
 

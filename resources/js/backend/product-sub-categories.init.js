@@ -253,7 +253,6 @@ function editCategoryList(elem){
             document.getElementById("addNewCategory").innerHTML = "Save";
             document.getElementById("categoryid-input").value = item.id;
             document.getElementById("SubcategoryTitle").value = item.subcategory;
-            document.getElementById("category_id").value = 15;
             categoryInput.setChoiceByValue(item.category);
             document.getElementById("descriptionInput").value = item.description;
         }

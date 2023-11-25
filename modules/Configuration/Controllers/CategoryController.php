@@ -80,11 +80,8 @@ class CategoryController extends Controller
                 $message = 'OOPS, Category cannot be updated!!';
             }
         }
-
-        return redirect()->route('category.index')->with(
-            $category ? 'successMessage' : 'errorMessage',
-            $message
-        );
+        session()->flash('message.updated', $message);
+        return redirect()->route('category.index');
     }
 
     
@@ -107,9 +104,11 @@ class CategoryController extends Controller
             $deleted = $category->delete();
 
             if ($deleted) {
-                return response()->json(['status' => 200, 'message' => 'Category and associated files successfully deleted.'], 200);
+                session()->flash('message.updated', "Category and associated files successfully deleted.");
+                return redirect()->route('category.index');
             } else {
-                return response()->json(['status' => 500, 'message' => 'Failed to delete category.'], 500);
+                session()->flash('message.updated', "Failed to delete category");
+                return redirect()->route('category.index');
             }
         } else {
             return response()->json(['status' => 404, 'message' => 'Category not found.'], 404);

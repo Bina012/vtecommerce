@@ -17,7 +17,18 @@
 </head>
 
 <body>
-
+<!-- @if(session()->has('message.updated'))
+        @section('sweet-alert')
+            <script>
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'message here',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @show
+    @endif -->
     <!-- Begin page -->
     <div id="layout-wrapper">
         <!-- top tagbar -->

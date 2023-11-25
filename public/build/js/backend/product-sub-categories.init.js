@@ -146,9 +146,11 @@ searchResultList.addEventListener("keyup", function () {
 });
 
 var cateField = document.getElementById("categorySelect");
+
 var categoryInput = new Choices(cateField, {
     searchEnabled: false,
 });
+
 
 var createCategoryForm = document.querySelectorAll('.createCategory-form')
 Array.prototype.slice.call(createCategoryForm).forEach(function (form) {
@@ -248,12 +250,14 @@ function editCategoryList(elem){
     var getEditid = elem;
     subCategoriesData = subCategoriesData.map(function (item) {
         if (item.id == getEditid) {
+            
             editList = true;
             document.getElementById("addCategoryLabel").innerHTML = "Edit Sub Categories";
             document.getElementById("addNewCategory").innerHTML = "Save";
             document.getElementById("categoryid-input").value = item.id;
             document.getElementById("SubcategoryTitle").value = item.subcategory;
-            categoryInput.setChoiceByValue(item.category);
+            var categoryId = item.category_id.toString();
+            categoryInput.setChoiceByValue(categoryId);
             document.getElementById("descriptionInput").value = item.description;
         }
         return item;
