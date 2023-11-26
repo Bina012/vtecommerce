@@ -178,7 +178,7 @@ function editCategoryList(elem){
             editList = true;
             document.getElementById("addCategoryLabel").innerHTML = "Edit Sub Categories";
             document.getElementById("addNewCategory").innerHTML = "Save";
-            document.getElementById("categoryid-input").value = item.category_id;
+            document.getElementById("categoryid-input").value = item.id;
             document.getElementById("SubcategoryTitle").value = item.subcategory;
             categoryInput.setChoiceByValue(item.category);
             document.getElementById("descriptionInput").value = item.description;
