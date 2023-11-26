@@ -6,9 +6,8 @@ Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
 File: Create Product init File
 */
-
 ClassicEditor
-    .create(document.querySelector('#ckeditor-classic'))
+    .create(document.querySelector('#editor2'))
     .then(function (editor) {
         editor.ui.view.editable.element.style.height = '200px';
     })

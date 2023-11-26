@@ -41,7 +41,7 @@
                     <div class="collapse menu-dropdown" id="sidebarProducts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="product-list" class="nav-link" data-key="t-list-view">{{ __('t-list-view') }}</a>
+                                <a href="{{ route('product.index') }}" class="nav-link" data-key="t-list-view">{{ __('t-list-view') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="product-grid" class="nav-link" data-key="t-grid-view">{{ __('t-grid-view') }}</a>
