@@ -28,7 +28,7 @@ class SubCategoryController extends Controller
     public function index()
     {
         $subCategoriesData = [];
-   
+        
         $subcategories=$this->subcategories->with(['category'])->get();
         
         foreach ($subcategories as $subcategory) {
@@ -38,6 +38,7 @@ class SubCategoryController extends Controller
                 "subcategory" => $subcategory->title,
                 "category_id" => $category->id,
                 "category" => $category->title,
+                "category_id" => $category->id,
                 "description" => $subcategory->description
             ];
 
@@ -62,15 +63,11 @@ class SubCategoryController extends Controller
     {
 
 
-        $data = $request->except(['attachment']);
+        $data = $request->all();
+        
+        
 
-        if ($request->file('attachment')) {
-            $data['image_path'] = $request->file('attachment')
-                ->storeAs($this->destinationPath, time() . '.' . $request->file('attachment')
-                    ->getClientOriginalExtension());
-        }
-
-        if ($data['id'] === null) {
+            if ($data['id'] === null) {
             unset($data['id']); // Remove the 'id' field if it's null for insertion
             $subcategory = $this->subcategories->create($data);
             $message = $subcategory ? 'Category added successfully!!' : 'OOPS, Category cannot be added!!';
@@ -83,11 +80,8 @@ class SubCategoryController extends Controller
                 $message = 'OOPS, Sub Category cannot be updated!!';
             }
         }
-
-        return redirect()->route('subcategories.index')->with(
-            $subcategory ? 'successMessage' : 'errorMessage',
-            $message
-        );
+       session()->flash('message.updated', $message);
+       return redirect()->route('subcategories.index');
     }
 
     

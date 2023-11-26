@@ -3,8 +3,7 @@
     Categories
 @endsection
 @section('css')
-    <!-- extra css -->
-    <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    
 @endsection
 @section('content')
     <x-breadcrumb title="Categories" pagetitle="Products" />
@@ -225,7 +224,6 @@ var categoryListData = @json($categoryListData);
 
 </script>
    <script src="{{ URL::asset('build/js/backend/product-categories.init.js') }}"></script>
-   <script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>

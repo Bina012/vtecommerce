@@ -337,7 +337,6 @@ item.addEventListener('click', function (event) {
             },
         })
         .then(response => {
-            console.log(response);
             if (response.status == 200) {
                 Swal.fire({
                     title: 'Success',
