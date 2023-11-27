@@ -7,8 +7,6 @@ Contact: Themesbrand@gmail.com
 File: Product-list init File
 */
 
-console.log(productListData);
-
 var inputValueJson = sessionStorage.getItem('inputValue');
 if (inputValueJson) {
     inputValueJson = JSON.parse(inputValueJson);
@@ -178,14 +176,14 @@ searchProductList.addEventListener("keyup", function () {
 var slider = document.getElementById('product-price-range');
 if (slider) {
     noUiSlider.create(slider, {
-        start: [0, 2000], // Handle start position
+        start: [0, 5000], // Handle start position
         step: 10, // Slider moves in increments of '10'
         margin: 20, // Handles must be more than '20' apart
         connect: true, // Display a colored bar between the handles
         behaviour: 'tap-drag', // Move handle on tap, bar is draggable
         range: { // Slider can select '0' to '100'
             'min': 0,
-            'max': 2000
+            'max': 5000
         },
         format: wNumb({ decimals: 0, prefix: '$ ' })
     });

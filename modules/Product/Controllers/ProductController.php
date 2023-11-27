@@ -37,8 +37,8 @@ class ProductController extends Controller
                 'id' => $product->id,
                 "productTitle" => $product->title,
                 "category" => $category->title,
-                "price" => $product->price,
-                "discount" => $product->discount.'%',
+                "price" => '2100.00',
+                "discount" =>'10%',
                 "color"=> json_decode($product->color),
                 "size" => json_decode($product->size),
                 "stock" => $product->stocks,
@@ -79,11 +79,13 @@ class ProductController extends Controller
         if ($data['id'] === null) {
             unset($data['id']); // Remove the 'id' field if it's null for insertion
             $product = $this->products->create($data);
+            //images logic goes after this
             $message = $product ? 'Product added successfully!!' : 'OOPS, Product cannot be added!!';
         } else {
             $product = $this->products->find($data['id']);
             if ($product) {
                 $product->update($data);
+                //unlink image logic goes here
                 $message = 'Product updated successfully!!';
             } else {
                 $message = 'OOPS, product cannot be updated!!';
