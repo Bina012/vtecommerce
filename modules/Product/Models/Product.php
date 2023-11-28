@@ -31,4 +31,8 @@ class Product extends Model
     public function category(){
         return $this->belongsTo('Modules\Configuration\Models\Category','category_id');
     }
+
+    public function images(){
+        return $this->hasMany(ProductGallery::class);
+    }
 }

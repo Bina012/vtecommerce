@@ -6,9 +6,17 @@ Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
 File: Create Product init File
 */
+
+var editinputValueJson = sessionStorage.getItem('editInputValue');
+let ck_editor;
+
 ClassicEditor
     .create(document.querySelector('#editor2'))
     .then(function (editor) {
+        ck_editor = editor;
+        if(editinputValueJson){
+            ck_editor.setData(editinputValueJson.description);
+        }
         editor.ui.view.editable.element.style.height = '200px';
     })
     .catch(function (error) {
@@ -16,11 +24,23 @@ ClassicEditor
     });
 
 var thumbnailArray = [];
+var uploadPathArray = [];
 
 // Dropzone has been added as a global variable.
+var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
+
+function result(r){
+    uploadPathArray.push(r);
+}
 
 var myDropzone = new Dropzone("div.my-dropzone", { 
-    url: "/file/post",
+    url: "/product/upload",
+    headers:{
+        'X-CSRF-TOKEN': csrf_token
+    },
+    success:function(response,xhr){
+        result(xhr.imagePath);
+    },
     addRemoveLinks: true,
     removedfile: function (file) {
         file.previewElement.remove();
@@ -39,7 +59,6 @@ var productCategoryInput = new Choices('#choices-category-input', {
     searchEnabled: false,
 });
 
-var editinputValueJson = sessionStorage.getItem('editInputValue');
 if (editinputValueJson) {
     var editinputValueJson = JSON.parse(editinputValueJson);
     document.getElementById("formAction").value = "edit";
@@ -49,10 +68,14 @@ if (editinputValueJson) {
     myDropzone.options.thumbnail.call(myDropzone, mockFile, editinputValueJson.productImg);
     thumbnailArray.push(editinputValueJson.productImg)
     document.getElementById("product-title-input").value = editinputValueJson.productTitle;
+    document.getElementById("short_description_value").value = editinputValueJson.short_description;
+    document.getElementById("manufacturer-name-input").value = editinputValueJson.manufacture_name;
+    document.getElementById("manufacturer-brand-input").value = editinputValueJson.manufacture_brand;
+    document.getElementById("choices-publish-status-input").selectedOptions[0].value = editinputValueJson.status;
+    document.getElementById("choices-publish-visibility-input").selectedOptions[0].value = editinputValueJson.visibility;
     document.getElementById("stocks-input").value = editinputValueJson.stock;
     document.getElementById("product-price-input").value = editinputValueJson.price;
     document.getElementById("product-discount-input").value = editinputValueJson.discount;
-    document.getElementById("orders-input").value = editinputValueJson.orders;
     
     // clothe-colors
     Array.from(document.querySelectorAll(".clothe-colors li")).forEach(function (subElem) {
@@ -82,8 +105,8 @@ var forms = document.querySelectorAll('.needs-validation')
 var date = new Date().toUTCString().slice(5, 16);
 
 var itemid = 13;
-var colorsArray = [];
-var sizesArray = [];
+var colors = [];
+var sizes = [];
 
 Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener('submit', function (event) {
@@ -95,8 +118,13 @@ Array.prototype.slice.call(forms).forEach(function (form) {
             var productItemID = itemid;
             var productTitleValue = document.getElementById("product-title-input").value;
             var productCategoryValue = productCategoryInput.getValue(true);
+            var description = document.getElementById("editor2").value;
+            var short_description = document.getElementById("short_description_value").value;
+            var manufacture_name = document.getElementById("manufacturer-name-input").value;
+            var manufacture_brand = document.getElementById("manufacturer-brand-input").value;
+            var status = document.getElementById("choices-publish-status-input").selectedOptions[0].value;
+            var visibility = document.getElementById("choices-publish-visibility-input").selectedOptions[0].value;
             var stockInputValue = document.getElementById("stocks-input").value;
-            var orderValue = document.getElementById("orders-input").value;
             var productPriceValue = document.getElementById("product-price-input").value;
             var productDiscountVal = document.getElementById("product-discount-input").value;
 
@@ -104,7 +132,7 @@ Array.prototype.slice.call(forms).forEach(function (form) {
             document.querySelectorAll(".clothe-colors li").forEach(function (item) {
                 if (item.querySelector("input").checked == true) {
                     var colorListVal = item.querySelector("input").value;
-                    colorsArray.push(colorListVal)
+                    colors.push(colorListVal)
                 }
             });
 
@@ -112,51 +140,43 @@ Array.prototype.slice.call(forms).forEach(function (form) {
             document.querySelectorAll(".clothe-size li").forEach(function (item) {
                 if (item.querySelector("input").checked == true) {
                     var sizeListVal = item.querySelector("input").value;
-                    sizesArray.push(sizeListVal)
+                    sizes.push(sizeListVal)
                 }
             });
 
             var formAction = document.getElementById("formAction").value;
-            if (formAction == "add" && productCategoryValue !== "" && thumbnailArray.length > 0) {
-                if (sessionStorage.getItem('inputValue') != null) {
-                    var inputValueJson = JSON.parse(sessionStorage.getItem('inputValue'));
-                    var newObj = {
-                        "id": productItemID + 1,
-                        "productImg": thumbnailArray[0],
-                        "productTitle": productTitleValue,
-                        "category": productCategoryValue,
-                        "price": productPriceValue,
-                        "discount": productDiscountVal,
-                        "rating": "--",
-                        "color": colorsArray,
-                        "size": sizesArray,
-                        "stock": stockInputValue,
-                        "orders": orderValue,
-                        "publish": date,
-                    };
-                    inputValueJson.push(newObj);
-                    sessionStorage.setItem('inputValue', JSON.stringify(inputValueJson));
-                } else {
-                    var inputValueJson = [];
-                    var newObj = {
-                        'id': productItemID,
-                        "productImg": thumbnailArray[0],
-                        "productTitle": productTitleValue,
-                        "category": productCategoryValue,
-                        "price": productPriceValue,
-                        "discount": productDiscountVal,
-                        "rating": "--",
-                        "color": colorsArray,
-                        "size": sizesArray,
-                        "stock": stockInputValue,
-                        "orders": orderValue,
-                        "publish": date,
-                    };
-                    inputValueJson.push(newObj);
-                    sessionStorage.setItem('inputValue', JSON.stringify(inputValueJson));
-                }
-                window.location.replace("product-list.html");
-            }else if (formAction == "edit" && productCategoryValue !== "" && thumbnailArray.length > 0) {
+            if (formAction == "add" && productCategoryValue !== "" && uploadPathArray.length > 0) {
+                var newObj = {
+                    "id":null,
+                    "images_path": uploadPathArray,
+                    "title": productTitleValue,
+                    "category_id": productCategoryValue,
+                    "description" : description,
+                    "short_description" : short_description,
+                    "manufacture_name" : manufacture_name,
+                    "manufacture_brand" : manufacture_brand,
+                    "stocks": stockInputValue,
+                    "price": productPriceValue,
+                    "discount": productDiscountVal,
+                    "colors": colors,
+                    "sizes": sizes,
+                    "status":status,
+                    "visibility":visibility
+                };
+                $.ajax({
+                    type:'POST',
+                    url:'/product',
+                    data:newObj,
+                    headers:{
+                        'X-CSRF-TOKEN': csrf_token
+                    },
+                    success:function(response,xhr){
+                        console.log(response);
+                        console.log(xhr);
+                    }
+                })
+                window.location.replace("/product");
+            }else if (formAction == "edit" && productCategoryValue !== "" && uploadPathArray.length > 0) {
                 var editproductId = document.getElementById("product-id-input").value;
                 if (sessionStorage.getItem('editInputValue')) {
                     var editObj = {
@@ -175,7 +195,7 @@ Array.prototype.slice.call(forms).forEach(function (form) {
                     };
                     sessionStorage.setItem('editInputValue', JSON.stringify(editObj));
                 }
-                window.location.replace("product-list.html");
+                window.location.replace("/product");
             }else {
                 console.log('Form Action Not Found.');
             }

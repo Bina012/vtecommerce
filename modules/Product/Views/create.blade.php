@@ -4,6 +4,7 @@
 @endsection
 @section('css')
     <!-- extra css -->
+    <link rel="stylesheet" href="{{ URL::asset('build/libs/dropzone/dropzone.css') }}" type="text/css">
 @endsection
 @section('content')
     <x-breadcrumb title="Create product" pagetitle="Product" />
@@ -82,6 +83,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                       
                         <div class="dropzone my-dropzone">
                             <div class="dz-message">
                                 <div class="mb-3">
@@ -166,14 +168,14 @@
 
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-3 col-sm-6">
+                            <div class="col-lg-3 col-sm-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="orders-input">Orders</label>
                                     <input type="text" class="form-control" id="orders-input" placeholder="Orders"
                                         required>
                                     <div class="invalid-feedback">Please enter a product orders.</div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- end col -->
                         </div>
                         <!-- end row -->
@@ -382,7 +384,7 @@
                     </div>
                     <div class="card-body">
                         <p class="text-muted mb-2">Add short description for product</p>
-                        <textarea name="short_description" class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                        <textarea id="short_description_value" name="short_description" class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                     </div>
                     <!-- end card body -->
                 </div>
@@ -395,6 +397,9 @@
     </form>
 @endsection
 @section('scripts')
+    <!-- loading jquery for ajax call -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- ckeditor -->
     <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
 
@@ -405,4 +410,5 @@
 
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+   
 @endsection

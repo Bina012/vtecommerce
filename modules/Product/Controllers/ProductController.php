@@ -5,19 +5,25 @@ namespace Modules\Product\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Product\Repositories\ProductRepository;
+use Modules\Product\Repositories\ProductGalleryRepository;
 use Illuminate\Support\Facades\Storage;
 use Modules\Configuration\Repositories\CategoryRepository;
+use Modules\Product\Models\ProductGallery;
 
 class ProductController extends Controller
 {
     protected $categories;
     protected $destinationPath;
     protected $products;
+    protected $productGalleries;
 
-    public function __construct(CategoryRepository $categories,ProductRepository $products)
+    public function __construct(CategoryRepository $categories,
+                                ProductRepository $products,
+                                ProductGalleryRepository $productGalleries)
     {
         $this->products = $products;
         $this->categories = $categories;
+        $this->productGalleries = $productGalleries;
         $this->destinationPath = 'products';
     }
 
@@ -29,7 +35,7 @@ class ProductController extends Controller
     {
        $productsData = [];
         
-        $products = $this->products->with('category')->get();
+        $products = $this->products->with(['category','images'])->get();
         
         foreach ($products as $product) {
             $category = $product->category; 
@@ -43,7 +49,15 @@ class ProductController extends Controller
                 "size" => json_decode($product->size),
                 "stock" => $product->stocks,
                 "status" => $product->status,
-                "visibility" => $product->visibility
+                "visibility" => $product->visibility,
+                "description" => $product->description,
+                "short_description" => $product->short_description,
+                "manufacture_name" => $product->manufacture_name,
+                "manufacture_brand" => $product->manufacture_brand,
+                "status" => $product->status,
+                "visibility" => $product->visibility,
+                "images" => $product->images,
+                "imagePath" => $product->images[0]->image_path
             ];
 
            $productsData[] = $productData;
@@ -75,10 +89,19 @@ class ProductController extends Controller
         $sizeValue = json_encode($sizeArr);
         $data['size'] = $sizeValue;
 
-
         if ($data['id'] === null) {
             unset($data['id']); // Remove the 'id' field if it's null for insertion
             $product = $this->products->create($data);
+            if($product){
+                $imagePathArr = $data['images_path'];
+
+                foreach($imagePathArr as $imagePath){
+                    $imageGalleryObj = new ProductGallery();
+                    $imageGalleryObj->product_id = $product->id;
+                    $imageGalleryObj->image_path = $imagePath;
+                    $imageGalleryObj->save();
+                }
+            }
             //images logic goes after this
             $message = $product ? 'Product added successfully!!' : 'OOPS, Product cannot be added!!';
         } else {
@@ -93,6 +116,16 @@ class ProductController extends Controller
         }
        session()->flash('message.updated', $message);
        return redirect()->route('product.index');
+    }
+
+    public function fileupload(Request $request){
+        if ($request->file) {
+            $data['image_path'] = $request->file
+                ->storeAs($this->destinationPath, time() . '.' . $request->file->getClientOriginalExtension());
+
+            return response()->json(['success' => true,'status'=>200,'imagePath'=>$data['image_path']]);
+        }
+        return response()->json(['success' => false,'status'=>500,'imagePath' => null]);
     }
 
     

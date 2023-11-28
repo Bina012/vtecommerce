@@ -7,6 +7,8 @@ Contact: Themesbrand@gmail.com
 File: Product-list init File
 */
 
+console.log(productListData);
+
 var inputValueJson = sessionStorage.getItem('inputValue');
 if (inputValueJson) {
     inputValueJson = JSON.parse(inputValueJson);
@@ -77,7 +79,7 @@ if (document.getElementById("product-list")) {
                     return gridjs.html('<div class="d-flex align-items-center">\
                             <div class="flex-shrink-0 me-2 avatar-sm">\
                                 <div class="avatar-title bg-light rounded">\
-                                    <img src="'+ row.productImg + '" alt="" class="avatar-xs" />\
+                                    <img src="storage/'+ row.imagePath + '" alt="" class="avatar-xs" />\
                                 </div>\
                             </div>\
                             <div class="flex-grow-1">\
@@ -130,7 +132,7 @@ if (document.getElementById("product-list")) {
                         <a href="javascript:void(0);" class="btn btn-ghost-primary btn-icon btn-sm" data-bs-toggle="dropdown" aria-expanded="false" class=""><i class="mdi mdi-dots-horizontal"></i></a>\
                         <ul class="dropdown-menu dropdown-menu-end">\
                             <li>\
-                                <a class="dropdown-item" onClick="editProductList('+ row.id + ')" href="product-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>\
+                                <a class="dropdown-item" onClick="editProductList('+ row.id + ')" href="product/create"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>\
                             </li>\
                             <li>\
                                 <a class="dropdown-item remove-list" onClick="removeItem('+ row.id +')" data-bs-toggle="modal" href="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>Delete</a>\
