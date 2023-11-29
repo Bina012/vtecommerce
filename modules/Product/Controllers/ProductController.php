@@ -43,8 +43,8 @@ class ProductController extends Controller
                 'id' => $product->id,
                 "productTitle" => $product->title,
                 "category" => $category->title,
-                "price" => '2100.00',
-                "discount" =>'10%',
+                "price" => $product->price,
+                "discount" =>$product->discount,
                 "color"=> json_decode($product->color),
                 "size" => json_decode($product->size),
                 "stock" => $product->stocks,
@@ -101,21 +101,21 @@ class ProductController extends Controller
                     $imageGalleryObj->image_path = $imagePath;
                     $imageGalleryObj->save();
                 }
+                return response()->json(['success' => true,'status'=>200,'message'=>'Product added successfully!!']);
+            }else{
+                return response()->json(['success' => false,'status'=>500,'message'=>'Failed to add product!!']);
             }
-            //images logic goes after this
-            $message = $product ? 'Product added successfully!!' : 'OOPS, Product cannot be added!!';
+            
         } else {
             $product = $this->products->find($data['id']);
             if ($product) {
                 $product->update($data);
-                //unlink image logic goes here
-                $message = 'Product updated successfully!!';
+                return response()->json(['success' => true,'status'=>200,'message'=>'Product updated successfully!!']);
             } else {
-                $message = 'OOPS, product cannot be updated!!';
+                return response()->json(['success' => false,'status'=>500,'message'=>'Failed to update product!!']);
             }
         }
-       session()->flash('message.updated', $message);
-       return redirect()->route('product.index');
+        return response()->json(['success' => false,'status'=>500,'message'=>'Add or update product operation failed!!']);;
     }
 
     public function fileupload(Request $request){

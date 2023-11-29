@@ -9,13 +9,13 @@ File: Product-list init File
 
 console.log(productListData);
 
-var inputValueJson = sessionStorage.getItem('inputValue');
-if (inputValueJson) {
-    inputValueJson = JSON.parse(inputValueJson);
-    Array.from(inputValueJson).forEach(element => {
-        productListData.push(element);
-    });
-}
+// var inputValueJson = sessionStorage.getItem('inputValue');
+// if (inputValueJson) {
+//     inputValueJson = JSON.parse(inputValueJson);
+//     Array.from(inputValueJson).forEach(element => {
+//         productListData.push(element);
+//     });
+// }
 
 var editinputValueJson = sessionStorage.getItem('editInputValue');
 if (editinputValueJson) {

@@ -64,9 +64,15 @@ if (editinputValueJson) {
     document.getElementById("formAction").value = "edit";
     document.getElementById("product-id-input").value = editinputValueJson.id;
     productCategoryInput.setChoiceByValue(editinputValueJson.category);
-    myDropzone.options.addedfile.call(myDropzone, mockFile);
-    myDropzone.options.thumbnail.call(myDropzone, mockFile, editinputValueJson.productImg);
-    thumbnailArray.push(editinputValueJson.productImg)
+    
+    var imagesArray = editinputValueJson.images;
+    imagesArray.forEach(function(item){
+        myDropzone.options.addedfile.call(myDropzone, mockFile);
+        myDropzone.options.thumbnail.call(myDropzone,mockFile,'/storage/'+item.image_path);
+        uploadPathArray.push(item.image_path);
+    });
+    //myDropzone.options.thumbnail.call(myDropzone, mockFile, editinputValueJson.productImg);
+    //thumbnailArray.push(editinputValueJson.productImg)
     document.getElementById("product-title-input").value = editinputValueJson.productTitle;
     document.getElementById("short_description_value").value = editinputValueJson.short_description;
     document.getElementById("manufacturer-name-input").value = editinputValueJson.manufacture_name;
@@ -104,7 +110,6 @@ var forms = document.querySelectorAll('.needs-validation')
 // date & time
 var date = new Date().toUTCString().slice(5, 16);
 
-var itemid = 13;
 var colors = [];
 var sizes = [];
 
@@ -115,7 +120,6 @@ Array.prototype.slice.call(forms).forEach(function (form) {
             event.stopPropagation();
         } else {
             event.preventDefault();
-            var productItemID = itemid;
             var productTitleValue = document.getElementById("product-title-input").value;
             var productCategoryValue = productCategoryInput.getValue(true);
             var description = document.getElementById("editor2").value;
@@ -171,31 +175,42 @@ Array.prototype.slice.call(forms).forEach(function (form) {
                         'X-CSRF-TOKEN': csrf_token
                     },
                     success:function(response,xhr){
-                        console.log(response);
-                        console.log(xhr);
+                        window.location.replace("/product");
                     }
-                })
-                window.location.replace("/product");
+                });
             }else if (formAction == "edit" && productCategoryValue !== "" && uploadPathArray.length > 0) {
                 var editproductId = document.getElementById("product-id-input").value;
                 if (sessionStorage.getItem('editInputValue')) {
                     var editObj = {
                         "id": parseInt(editproductId),
-                        "productImg": thumbnailArray[0],
-                        "productTitle": productTitleValue,
-                        "category": productCategoryValue,
+                        //"images_path": uploadPathArray,
+                        "title": productTitleValue,
+                        "category_id": productCategoryValue,
+                        "description" : description,
+                        "short_description" : short_description,
+                        "manufacture_name" : manufacture_name,
+                        "manufacture_brand" : manufacture_brand,
+                        "stocks": stockInputValue,
                         "price": productPriceValue,
                         "discount": productDiscountVal,
-                        "rating": editinputValueJson.rating,
-                        "color": colorsArray,
-                        "size": sizesArray,
-                        "stock": stockInputValue,
-                        "orders": orderValue,
-                        "publish": editinputValueJson.publish,
+                        "colors": colors,
+                        "sizes": sizes,
+                        "status":status,
+                        "visibility":visibility
                     };
-                    sessionStorage.setItem('editInputValue', JSON.stringify(editObj));
+                    $.ajax({
+                        type:'POST',
+                        url:'/product',
+                        data:editObj,
+                        headers:{
+                            'X-CSRF-TOKEN': csrf_token
+                        },
+                        success:function(response,xhr){
+                            sessionStorage.removeItem("editInputValue");
+                            window.location.replace("/product");
+                        }
+                    });
                 }
-                window.location.replace("/product");
             }else {
                 console.log('Form Action Not Found.');
             }
