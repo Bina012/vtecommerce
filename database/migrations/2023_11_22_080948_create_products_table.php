@@ -15,8 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('category_id');
             $table->string('title')->nullable()->default(null);
-            $table->string('description')->nullable()->default(null);
-            $table->string('short_description')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
+            $table->text('short_description')->nullable()->default(null);
             $table->string('manufacture_name')->nullable()->default(null);
             $table->string('manufacture_brand')->nullable()->default(null);
             $table->string('stocks')->nullable()->default(null);

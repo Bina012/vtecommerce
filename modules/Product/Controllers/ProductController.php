@@ -36,6 +36,8 @@ class ProductController extends Controller
        $productsData = [];
         
         $products = $this->products->with(['category','images'])->get();
+        $maxPricedProduct = $products->max('price'); // Get the maximum price among products
+        $categoryCounts = $this->categories->getAllCategoriesWithProductCount();               
         
         foreach ($products as $product) {
             $category = $product->category; 
@@ -63,16 +65,25 @@ class ProductController extends Controller
            $productsData[] = $productData;
         }
 
-        return view('Product::product-list')
-            ->withProductsData($productsData);
+        return view('Product::index')
+            ->withProductsData($productsData)
+            ->withMaxPrice($maxPricedProduct)
+            ->withCategoryCounts($categoryCounts);
     }
 
     public function create(){
+
         $categoriesList = $this->categories->all();
         return view('Product::create')
             ->withCategoriesList($categoriesList);
     }
 
+    public function view($id){
+
+        $categoriesList = $this->categories->all();
+        return view('Product::view')
+            ->withCategoriesList($categoriesList);
+    }
     /**
      * Store a newly created resource in storage.
      */

@@ -22,7 +22,7 @@
                             <h5 class="card-title mb-0">Filters</h5>
                         </div>
                         <div class="flex-shrink-0">
-                            <a href="#" class="text-decoration-underline" id="clearall">Clear All</a>
+                            <a href="#" class="text-decoration-underline" onclick = "clearall()" id="clearall">Clear All</a>
                         </div>
                     </div>
                 </div>
@@ -32,75 +32,20 @@
                         <div>
                             <p class="text-muted text-uppercase fs-13 mb-3">Products</p>
                             <ul class="list-unstyled mb-0 filter-list">
-                                <li>
+                            @foreach ($categoryCounts as $categoryCount )
+                            <li>
                                     <a href="#" class="d-flex py-1 align-items-center">
                                         <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Grocery</h6>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Fashion</h6>
+                                            <h6 class="mb-0 listname">{{$categoryCount->title}}</h6>
                                         </div>
                                         <div class="flex-shrink-0 ms-2">
-                                            <span class="badge bg-light text-muted">5</span>
+                                            <span class="badge bg-light text-muted">{{$categoryCount->products_count}}</span>
                                         </div>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Watches</h6>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Electronics</h6>
-                                        </div>
-                                        <div class="flex-shrink-0 ms-2">
-                                            <span class="badge bg-light text-muted">5</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Furniture</h6>
-                                        </div>
-                                        <div class="flex-shrink-0 ms-2">
-                                            <span class="badge bg-light text-muted">6</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Automotive Accessories</h6>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Appliances</h6>
-                                        </div>
-                                        <div class="flex-shrink-0 ms-2">
-                                            <span class="badge bg-light text-muted">7</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="d-flex py-1 align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-0 listname">Kids</h6>
-                                        </div>
-                                    </a>
-                                </li>
+                            </li>
+                            @endforeach  
+                           
+                               
                             </ul>
                         </div>
                     </div>
@@ -112,7 +57,7 @@
                         <div class="formCost d-flex gap-2 align-items-center mt-3">
                             <input class="form-control form-control-sm" type="text" id="minCost" value="0"> <span
                                 class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm"
-                                type="text" id="maxCost" value="1000">
+                                type="text" id="maxCost" value="{{$maxPrice}}">
                         </div>
                     </div>
 
@@ -444,6 +389,7 @@
 
     <script>
         var productListData = @json($productsData);
+        var maxprice = {{ $maxPrice }};
     </script>
     <!-- nouisliderribute js -->
     <script src="{{ URL::asset('build/libs/nouislider/nouislider.min.js') }}"></script>

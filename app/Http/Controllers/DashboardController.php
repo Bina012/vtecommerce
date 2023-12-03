@@ -16,6 +16,12 @@ class DashboardController extends Controller
             ->withUser($authUser);
     }
 
+    public function public()
+    {
+        return view('index');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

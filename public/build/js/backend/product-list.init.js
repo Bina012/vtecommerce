@@ -79,7 +79,7 @@ if (document.getElementById("product-list")) {
                     return gridjs.html('<div class="d-flex align-items-center">\
                             <div class="flex-shrink-0 me-2 avatar-sm">\
                                 <div class="avatar-title bg-light rounded">\
-                                    <img src="storage/'+ row.imagePath + '" alt="" class="avatar-xs" />\
+                                    <img src="../storage/'+ row.imagePath + '" alt="" class="avatar-xs" />\
                                 </div>\
                             </div>\
                             <div class="flex-grow-1">\
@@ -94,13 +94,13 @@ if (document.getElementById("product-list")) {
                 name: 'Stock',
                 width: '94px',
             },
-            // {
-            //     name: 'Rate',
-            //     data: (function (row) {
-            //         return gridjs.html('<span class="badge bg-light text-body fs-13 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>' + row.rating + '</span>');
-            //     }),
-            //     width: '80px',
-            // },
+            {
+                name: 'Rate',
+                data: (function (row) {
+                    return gridjs.html('<span class="badge bg-light text-body fs-13 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>' + row.rating + '</span>');
+                }),
+                width: '80px',
+            },
             {
                 name: 'Price',
                 data: (function (row) {
@@ -169,23 +169,28 @@ searchProductList.addEventListener("keyup", function () {
         })
     }
     var filterData = filterItems(productListData, inputVal);
-    productList.updateConfig({
-        data: filterData
-    }).forceRender();
+        productList.updateConfig({
+            data: filterData
+        }).forceRender();
 });
 
+function clearall(){
+    productList.updateConfig({
+        data: productListData
+    }).forceRender();
+}
 // price range slider
 var slider = document.getElementById('product-price-range');
 if (slider) {
     noUiSlider.create(slider, {
-        start: [0, 5000], // Handle start position
+        start: [0, maxprice], // Handle start position
         step: 10, // Slider moves in increments of '10'
         margin: 20, // Handles must be more than '20' apart
         connect: true, // Display a colored bar between the handles
         behaviour: 'tap-drag', // Move handle on tap, bar is draggable
         range: { // Slider can select '0' to '100'
             'min': 0,
-            'max': 5000
+            'max': maxprice
         },
         format: wNumb({ decimals: 0, prefix: '$ ' })
     });
@@ -383,8 +388,10 @@ Array.from(document.querySelectorAll('.filter-list a')).forEach(function (filter
         if (filterListItem) filterListItem.classList.remove("active");
         filteritem.classList.add('active');
 
-        var filterItemValue = filteritem.querySelector(".listname").innerHTML
+        var normalizedFilterValue = filteritem.querySelector(".listname").innerHTML
+        var filterItemValue = normalizedFilterValue.replace('&amp;', '&');
         var filterData = productListData.filter(filterlist => filterlist.category === filterItemValue);
+        
 
         productList.updateConfig({
             data: filterData

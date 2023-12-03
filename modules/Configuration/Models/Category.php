@@ -4,6 +4,7 @@ namespace Modules\Configuration\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Product\Models\Product;
 
 class Category extends Model
 {
@@ -22,5 +23,9 @@ class Category extends Model
    public function subcategory()
     {
       return $this->hasMany(SubCategory::class);
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }
