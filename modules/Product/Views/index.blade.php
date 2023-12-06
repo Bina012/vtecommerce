@@ -12,7 +12,7 @@
 @section('content')
 
     <x-breadcrumb title="Product List" pagetitle="Products" />
-    
+
     <div class="row">
         <div class="col-xl-3 col-lg-4">
             <div class="card overflow-hidden">
@@ -43,9 +43,9 @@
                                         </div>
                                     </a>
                             </li>
-                            @endforeach  
-                           
-                               
+                            @endforeach
+
+
                             </ul>
                         </div>
                     </div>
@@ -390,6 +390,7 @@
     <script>
         var productListData = @json($productsData);
         var maxprice = {{ $maxPrice }};
+        var url = @json($url);
     </script>
     <!-- nouisliderribute js -->
     <script src="{{ URL::asset('build/libs/nouislider/nouislider.min.js') }}"></script>

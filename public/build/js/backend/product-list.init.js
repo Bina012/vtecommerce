@@ -7,7 +7,7 @@ Contact: Themesbrand@gmail.com
 File: Product-list init File
 */
 
-console.log(productListData);
+console.log(productListData,url);
 
 // var inputValueJson = sessionStorage.getItem('inputValue');
 // if (inputValueJson) {
@@ -79,7 +79,7 @@ if (document.getElementById("product-list")) {
                     return gridjs.html('<div class="d-flex align-items-center">\
                             <div class="flex-shrink-0 me-2 avatar-sm">\
                                 <div class="avatar-title bg-light rounded">\
-                                    <img src="../storage/'+ row.imagePath + '" alt="" class="avatar-xs" />\
+                                    <img src= "'+url+'/vt-ecommerce/storage/app/'+ row.imagePath + '" alt="" class="avatar-xs" />\
                                 </div>\
                             </div>\
                             <div class="flex-grow-1">\
@@ -391,7 +391,7 @@ Array.from(document.querySelectorAll('.filter-list a')).forEach(function (filter
         var normalizedFilterValue = filteritem.querySelector(".listname").innerHTML
         var filterItemValue = normalizedFilterValue.replace('&amp;', '&');
         var filterData = productListData.filter(filterlist => filterlist.category === filterItemValue);
-        
+
 
         productList.updateConfig({
             data: filterData

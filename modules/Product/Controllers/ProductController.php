@@ -34,13 +34,13 @@ class ProductController extends Controller
     public function index()
     {
        $productsData = [];
-        
+        $url = config('app.url');
         $products = $this->products->with(['category','images'])->get();
         $maxPricedProduct = $products->max('price'); // Get the maximum price among products
-        $categoryCounts = $this->categories->getAllCategoriesWithProductCount();               
-        
+        $categoryCounts = $this->categories->getAllCategoriesWithProductCount();
+
         foreach ($products as $product) {
-            $category = $product->category; 
+            $category = $product->category;
             $productData = [
                 'id' => $product->id,
                 "productTitle" => $product->title,
@@ -68,7 +68,8 @@ class ProductController extends Controller
         return view('Product::index')
             ->withProductsData($productsData)
             ->withMaxPrice($maxPricedProduct)
-            ->withCategoryCounts($categoryCounts);
+            ->withCategoryCounts($categoryCounts)
+            ->with('url',$url);
     }
 
     public function create(){
@@ -95,7 +96,7 @@ class ProductController extends Controller
         $colorArr = $data['colors'];
         $colorValue = json_encode($colorArr);
         $data['color'] = $colorValue;
-       
+
         $sizeArr = $data['sizes'];
         $sizeValue = json_encode($sizeArr);
         $data['size'] = $sizeValue;
@@ -116,7 +117,7 @@ class ProductController extends Controller
             }else{
                 return response()->json(['success' => false,'status'=>500,'message'=>'Failed to add product!!']);
             }
-            
+
         } else {
             $product = $this->products->find($data['id']);
             if ($product) {
@@ -139,7 +140,7 @@ class ProductController extends Controller
         return response()->json(['success' => false,'status'=>500,'imagePath' => null]);
     }
 
-    
+
     public function destroy($id)
     {
 
